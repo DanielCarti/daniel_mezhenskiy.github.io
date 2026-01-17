@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Даниэль | Мастер по сборке мебели</title>
+    <title>Даниэль | Профессиональная сборка мебели</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0a0a; --card: #161616; --text: #ffffff; --dim: #a1a1aa;
-            --accent: #6d28d9; --border: #27272a;
+            --bg: #0a0a0a; 
+            --card: #161616; 
+            --text: #ffffff; 
+            --dim: #a1a1aa;
+            --accent: #6d28d9; 
+            --border: #27272a;
             --grad: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
+            --yellow: #fbbf24;
+            --dark-blue: #1e293b;
         }
         [data-theme="light"] {
             --bg: #f4f4f5; --card: #ffffff; --text: #09090b; --dim: #71717a;
@@ -20,12 +26,16 @@
             margin: 0; font-family: 'Inter', system-ui, sans-serif;
             background-color: var(--bg); color: var(--text); transition: 0.3s;
         }
+        
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 5%; position: sticky; top: 0;
             background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); z-index: 1000;
         }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--text); }
@@ -36,23 +46,51 @@
             color: var(--text); padding: 8px 12px; border-radius: 10px; font-weight: 600;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 80px 0 20px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 60px 0 20px; }
         
-        .hero { padding-top: 100px; }
-        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; font-weight: 800; line-height: 1; }
+        h2 { font-size: 2rem; color: var(--yellow); border-left: 4px solid var(--yellow); padding-left: 15px; margin-bottom: 30px; }
         .accent { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
-        .b-pri { background: var(--grad); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: bold; }
-        .b-sec { border: 1px solid var(--border); color: var(--text); padding: 16px 32px; border-radius: 14px; text-decoration: none; }
-
-        .card { 
-            background: var(--card); padding: 30px; border-radius: 24px; 
-            border: 1px solid var(--border); margin-bottom: 20px; 
-        }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        
+        .service-card { 
+            background: var(--dark-blue); padding: 25px; border-radius: 16px; border: 1px solid #334155; 
+            display: flex; flex-direction: column; gap: 15px; transition: 0.3s;
+        }
+        .service-card i { color: var(--yellow); font-size: 1.8rem; }
+        .price-badge { background: var(--yellow); color: #000; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+
+        .card-exp { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 20px; }
+
+        .guarantee-box { background: var(--card); border: 1px dashed var(--yellow); padding: 25px; border-radius: 16px; margin-top: 20px; }
+        .guarantee-list { list-style: none; padding: 0; }
+        .guarantee-list li { margin-bottom: 10px; padding-left: 25px; position: relative; }
+        .guarantee-list li::before { content: "✓"; position: absolute; left: 0; color: var(--yellow); font-weight: bold; }
+
+        /* Секция Сделать заказ */
+        .cta-section {
+            background-color: var(--yellow);
+            color: #0f172a;
+            padding: 60px 20px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .cta-section h2 { border: none; color: #0f172a; padding: 0; margin-bottom: 15px; font-size: 2.5rem; justify-content: center; display: flex; }
+        .cta-btn {
+            display: inline-block;
+            background: #0f172a;
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            transition: 0.3s;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+
         .hidden { display: none; }
         @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
@@ -60,18 +98,12 @@
 <body data-theme="dark">
 
 <nav>
-    <div style="font-weight:900; font-size: 1.2rem;">ДАНИЭЛЬ</div>
+    <div class="logo"><div class="logo-dot"></div> Даниэль</div>
     <div class="nav-links" id="menu-ru">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
         <a href="#experience">Опыт</a>
         <a href="#guarantee">Гарантия</a>
-    </div>
-    <div class="nav-links hidden" id="menu-en">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#experience">Experience</a>
-        <a href="#guarantee">Warranty</a>
     </div>
     <div class="controls">
         <button class="c-btn" onclick="toggleLang()" id="lBtn">EN</button>
@@ -81,56 +113,125 @@
 
 <div class="container">
     <div id="ru">
-        <section class="hero" id="about">
-            <h1>Сборка мебели <br><span class="accent">как искусство</span></h1>
-            <p style="color:var(--dim); font-size: 1.3rem; margin: 20px 0;">Профессиональный монтаж Askona, Орматек, Райтон и IKEA. Опыт 5 лет.</p>
-            <div class="btn-group">
-                <a href="tel:+79017803794" class="b-pri">Связаться</a>
-                <a href="#experience" class="b-sec">Портфолио</a>
+        <section id="about">
+            <h2>О мастере</h2>
+            <div class="card-exp">
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Профессиональный сборщик корпусной мебели с инженерным подходом и опытом работы более 5 лет. Специализируюсь на премиальных брендах и сложных конструкциях. За время карьеры собрал тысячи единиц мебели, работая в режиме высокой интенсивности (до 10 кроватей в день без потери качества).
+                </p>
+                <p style="font-size: 1.1rem;">Мой подход — это сочетание скорости, аккуратности и безупречного сервиса в общении с каждым клиентом.</p>
             </div>
         </section>
 
         <section id="services">
             <h2>Услуги</h2>
             <div class="grid">
-                <div class="card"><i class="fas fa-bed"></i> <h3>Кровати</h3> <p>Любые механизмы и бренды. От 3000₽.</p></div>
-                <div class="card"><i class="fas fa-door-open"></i> <h3>Шкафы</h3> <p>Створчатые и купе (PAX и др.).</p></div>
-                <div class="card"><i class="fas fa-tools"></i> <h3>Ремонт</h3> <p>Замена фурнитуры и регулировка.</p></div>
+                <div class="service-card">
+                    <i class="fas fa-bed"></i>
+                    <div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <strong style="font-size:1.2rem;">Кровати</strong>
+                            <span class="price-badge">от 3000₽</span>
+                        </div>
+                        <p style="color:var(--dim); font-size:0.9rem; margin:0;">Любые механизмы: подъемные, трансформеры, ортопедические основания.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-door-open"></i>
+                    <div>
+                        <strong style="font-size:1.2rem; display:block; margin-bottom:10px;">Шкафы-купе</strong>
+                        <p style="color:var(--dim); font-size:0.9rem; margin:0;">Сборка створчатых шкафов и систем хранения любой конфигурации (в т.ч. PAX).</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bolt"></i>
+                    <div>
+                        <strong style="font-size:1.2rem; display:block; margin-bottom:10px;">Электроника</strong>
+                        <p style="color:var(--dim); font-size:0.9rem; margin:0;">Монтаж встроенной подсветки и подключение механизмов с электроприводом.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="experience">
-            <h2>Опыт и VIP-кейсы</h2>
-            <div class="card">
-                <h3 class="accent">ТЦ «Авиапарк» (2022)</h3>
-                <p>В одиночку собрал весь мебельный фонд флагманского салона Askona перед открытием.</p>
-                <p>Клиенты: <b>Филипп Киркоров, Лада Дэнс.</b></p>
+            <h2>Опыт и репутация</h2>
+            
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">1. Флагманский салон Askona (ТЦ «Авиапарк», 2022)</h3>
+                <p>В одиночку осуществил полную сборку всего мебельного фонда флагманского салона накануне открытия. Объект сдан точно в срок с безупречным качеством монтажа.</p>
+            </div>
+
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">2. Масштабные проекты в ТЦ «Щелковский»</h3>
+                <p>Комплексное оснащение выставочных залов ведущих мебельных брендов:</p>
+                <ul style="color:var(--dim); padding-left: 20px;">
+                    <li style="margin-bottom: 8px;"><b>2022г:</b> Сборка двухэтажного салона <b>Askona</b> (полный цикл работ).</li>
+                    <li><b>2021г:</b> Сборка салона <b>Орматек</b> (подготовка к открытию).</li>
+                </ul>
+            </div>
+
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">3. Работа с VIP-клиентами</h3>
+                <p>Многолетний опыт работы в премиум-сегменте и деликатный подход. Среди клиентов, доверивших мне сборку своего интерьера: <span class="accent" style="font-weight:bold">Филипп Киркоров</span> и <span class="accent" style="font-weight:bold">Эвелина Блёданс</span>.</p>
+            </div>
+
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">4. Работа с брендами-лидерами</h3>
+                <p>Экспертное знание технологических карт и нюансов фурнитуры компаний <b>Askona, Орматек, Райтон и IKEA</b>. Опыт стабильной работы: минимум 20 дней в месяц на протяжении 5 лет.</p>
+            </div>
+        </section>
+
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">3. Работа с VIP-клиентами</h3>
+                <p>Многолетний опыт работы в премиум-сегменте и деликатный подход. Среди клиентов, доверивших мне сборку своего интерьера: <span class="accent" style="font-weight:bold">Филипп Киркоров</span> и <span class="accent" style="font-weight:bold">Эвелина Блёданс</span>.</p>
+            </div>
+
+            <div class="card-exp">
+                <h3 style="color:var(--yellow); margin-top:0;">4. Работа с брендами-лидерами</h3>
+                <p>Экспертное знание технологических карт и нюансов фурнитуры компаний <b>Askona, Орматек, Райтон и IKEA</b>. Опыт стабильной работы: минимум 20 дней в месяц на протяжении 5 лет.</p>
+            </div>
+        </section>
+        
             </div>
         </section>
 
         <section id="guarantee">
-            <h2>Гарантия</h2>
-            <div class="card" style="border-color: var(--accent);">
-                <h3>12 месяцев спокойствия</h3>
-                <p>Исправляю любые скрипы и люфты. Ответственность за каждое соединение.</p>
+            <h2>Гарантийные обязательства</h2>
+            <div class="card-exp">
+                <p>Я уверен в качестве своей работы и предоставляю гарантию <b>12 месяцев</b>.</p>
+                <div class="guarantee-box">
+                    <ul class="guarantee-list">
+                        <li>Нарушение геометрии из-за неверной затяжки крепежа.</li>
+                        <li>Некорректная работа фурнитуры (петель, доводчиков) при соблюдении норм нагрузки.</li>
+                        <li>Появление скрипов, связанных с ошибками при монтаже.</li>
+                        <li>Исправность всех подъемных механизмов и электроники.</li>
+                    </ul>
+                </div>
+                <p style="margin-top:20px; font-size:0.85rem; color:var(--dim);">
+                    * Гарантия не распространяется на естественный износ, дефекты материалов производителя, поломки из-за перегрузки или самостоятельного перемещения мебели клиентом после сборки.
+                </p>
             </div>
         </section>
+
+        <div class="cta-section">
+            <h2>Сделать заказ</h2>
+            <p style="font-size: 1.2rem; font-weight: 500;">Работаю по Москве и МО (Химки, Королев, Мытищи и др.)</p>
+            <p style="font-size: 1.1rem; margin-top: 10px;">Связь с 12:00 до 23:00</p>
+            <a href="tel:+79017803794" class="cta-btn">Позвонить мастеру</a>
+        </div>
     </div>
 
     <div id="en" class="hidden">
-        <section class="hero" id="about-en">
-            <h1>Furniture Assembly <br><span class="accent">Fine-Tuned</span></h1>
-            <p style="color:var(--dim); font-size: 1.3rem; margin: 20px 0;">5+ years of expertise in Askona, Ormatek, Raiton, and IKEA.</p>
-            <div class="btn-group">
-                <a href="tel:+79017803794" class="b-pri">Call Me</a>
-                <a href="#experience" class="b-sec">Experience</a>
-            </div>
+        <section class="hero">
+            <h1>Professional Assembly</h1>
+            <p>English version is under maintenance. Please use RU.</p>
         </section>
-        <section><h2>Services</h2><div class="grid"><div class="card"><h3>Beds</h3><p>All brands and mechanisms.</p></div><div class="card"><h3>Wardrobes</h3><p>Sliding and hinged systems.</p></div></div></section>
     </div>
 </div>
 
-<footer style="text-align:center; padding: 50px; color:var(--dim);">© 2026 Даниэль. Москва и МО.</footer>
+<footer style="text-align:center; padding: 50px; color:var(--dim); border-top:1px solid var(--border);">
+    © 2026 Даниэль. Сборка Askona, Орматек, Райтон, IKEA.
+</footer>
 
 <script>
     function toggleTheme() {
@@ -142,11 +243,9 @@
     }
     function toggleLang() {
         const r = document.getElementById('ru'); const e = document.getElementById('en');
-        const mr = document.getElementById('menu-ru'); const me = document.getElementById('menu-en');
         const b = document.getElementById('lBtn');
         const isR = e.classList.contains('hidden');
         r.classList.toggle('hidden'); e.classList.toggle('hidden');
-        mr.classList.toggle('hidden'); me.classList.toggle('hidden');
         b.innerText = isR ? 'RU' : 'EN';
     }
 </script>
