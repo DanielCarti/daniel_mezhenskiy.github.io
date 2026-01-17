@@ -3,186 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Даниэль | Сборка мебели</title>
+    <title>Даниэль | Мастер по сборке мебели</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card: #161616;
-            --text: #ffffff;
-            --dim: #a1a1aa;
-            --accent: #6d28d9;
-            --btn-grad: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
-            --border: #27272a;
+            --bg: #0a0a0a; --card: #161616; --text: #ffffff; --dim: #a1a1aa;
+            --accent: #6d28d9; --border: #27272a;
+            --grad: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
         }
-
         [data-theme="light"] {
-            --bg: #f4f4f5;
-            --card: #ffffff;
-            --text: #09090b;
-            --dim: #71717a;
-            --accent: #4f46e5;
-            --border: #e4e4e7;
+            --bg: #f4f4f5; --card: #ffffff; --text: #09090b; --dim: #71717a;
+            --accent: #4f46e5; --border: #e4e4e7;
         }
-
+        * { box-sizing: border-box; scroll-behavior: smooth; }
         body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            transition: background-color 0.3s, color 0.3s;
-            overflow-x: hidden;
+            margin: 0; font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg); color: var(--text); transition: 0.3s;
         }
-
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; position: sticky; top: 0;
+            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); z-index: 1000;
         }
-
-        .nav-controls { display: flex; gap: 10px; align-items: center; }
-        .control-btn { 
-            cursor: pointer; 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            color: var(--text); 
-            padding: 8px 15px; 
-            border-radius: 10px; 
-            font-size: 0.85rem; 
-            font-weight: 600;
-        }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--text); }
         
-        .hero { padding: 60px 0; }
-        h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin-bottom: 20px; line-height: 1.1; font-weight: 800; }
-        .accent-text { background: var(--btn-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .btn-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 30px; }
-        .btn-primary { 
-            background: var(--btn-grad); 
-            color: white; 
-            padding: 16px 32px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            font-weight: bold;
-            box-shadow: 0 10px 15px -3px rgba(109, 40, 217, 0.3);
-        }
-        .btn-secondary { 
-            border: 1px solid var(--border); 
-            color: var(--text); 
-            padding: 16px 32px; 
-            border-radius: 14px; 
-            text-decoration: none;
-            background: var(--card);
+        .controls { display: flex; gap: 10px; }
+        .c-btn { 
+            cursor: pointer; background: var(--card); border: 1px solid var(--border); 
+            color: var(--text); padding: 8px 12px; border-radius: 10px; font-weight: 600;
         }
 
-        h2 { font-size: 1.8rem; margin-top: 60px; margin-bottom: 25px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 80px 0 20px; }
+        
+        .hero { padding-top: 100px; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; font-weight: 800; line-height: 1; }
+        .accent { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        .b-pri { background: var(--grad); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: bold; }
+        .b-sec { border: 1px solid var(--border); color: var(--text); padding: 16px 32px; border-radius: 14px; text-decoration: none; }
+
         .card { 
-            background: var(--card); 
-            padding: 30px; 
-            border-radius: 24px; 
-            border: 1px solid var(--border);
-            margin-bottom: 20px;
+            background: var(--card); padding: 30px; border-radius: 24px; 
+            border: 1px solid var(--border); margin-bottom: 20px; 
         }
-
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
         .hidden { display: none; }
-        footer { text-align: center; padding: 60px 0; color: var(--dim); font-size: 0.9rem; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
 <body data-theme="dark">
 
 <nav>
-    <div style="font-weight:800; letter-spacing:-0.5px;">ДАНИЭЛЬ</div>
-    <div class="nav-controls">
-        <button class="control-btn" onclick="toggleLanguage()" id="langBtn">EN</button>
-        <button class="control-btn" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+    <div style="font-weight:900; font-size: 1.2rem;">ДАНИЭЛЬ</div>
+    <div class="nav-links" id="menu-ru">
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#experience">Опыт</a>
+        <a href="#guarantee">Гарантия</a>
+    </div>
+    <div class="nav-links hidden" id="menu-en">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Experience</a>
+        <a href="#guarantee">Warranty</a>
+    </div>
+    <div class="controls">
+        <button class="c-btn" onclick="toggleLang()" id="lBtn">EN</button>
+        <button class="c-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="tIcon"></i></button>
     </div>
 </nav>
 
 <div class="container">
-    <div id="content-ru">
-        <section class="hero">
-            <h1>Сборка мебели <br><span class="accent-text">как искусство</span></h1>
-            <p style="color:var(--dim); font-size: 1.2rem; max-width: 500px;">Мастер с 5-летним опытом. Специализация: Askona, Орматек, Райтон и IKEA.</p>
-            <div class="btn-container">
-                <a href="tel:+79017803794" class="btn-primary">Связаться</a>
-                <a href="#exp-ru" class="btn-secondary">Опыт работы</a>
+    <div id="ru">
+        <section class="hero" id="about">
+            <h1>Сборка мебели <br><span class="accent">как искусство</span></h1>
+            <p style="color:var(--dim); font-size: 1.3rem; margin: 20px 0;">Профессиональный монтаж Askona, Орматек, Райтон и IKEA. Опыт 5 лет.</p>
+            <div class="btn-group">
+                <a href="tel:+79017803794" class="b-pri">Связаться</a>
+                <a href="#experience" class="b-sec">Портфолио</a>
             </div>
         </section>
 
-        <section id="exp-ru">
-            <h2>Опыт и Репутация</h2>
-            <div class="card">
-                <h3 style="margin-top:0; color:var(--accent)">ТЦ «Авиапарк» (2022)</h3>
-                <p>Единоличная сборка флагманского салона Askona перед официальным открытием.</p>
-                <p style="margin-bottom:0;">Среди клиентов: <b>Филипп Киркоров, Лада Дэнс.</b></p>
+        <section id="services">
+            <h2>Услуги</h2>
+            <div class="grid">
+                <div class="card"><i class="fas fa-bed"></i> <h3>Кровати</h3> <p>Любые механизмы и бренды. От 3000₽.</p></div>
+                <div class="card"><i class="fas fa-door-open"></i> <h3>Шкафы</h3> <p>Створчатые и купе (PAX и др.).</p></div>
+                <div class="card"><i class="fas fa-tools"></i> <h3>Ремонт</h3> <p>Замена фурнитуры и регулировка.</p></div>
             </div>
+        </section>
+
+        <section id="experience">
+            <h2>Опыт и VIP-кейсы</h2>
             <div class="card">
-                <h3 style="margin-top:0;">Гарантия 12 месяцев</h3>
-                <p style="color:var(--dim); margin-bottom:0;">Ответственность за каждый винт. Работаю быстро, чисто и по инструкции.</p>
+                <h3 class="accent">ТЦ «Авиапарк» (2022)</h3>
+                <p>В одиночку собрал весь мебельный фонд флагманского салона Askona перед открытием.</p>
+                <p>Клиенты: <b>Филипп Киркоров, Лада Дэнс.</b></p>
+            </div>
+        </section>
+
+        <section id="guarantee">
+            <h2>Гарантия</h2>
+            <div class="card" style="border-color: var(--accent);">
+                <h3>12 месяцев спокойствия</h3>
+                <p>Исправляю любые скрипы и люфты. Ответственность за каждое соединение.</p>
             </div>
         </section>
     </div>
 
-    <div id="content-en" class="hidden">
-        <section class="hero">
-            <h1>Furniture Assembly <br><span class="accent-text">Fine-Tuned</span></h1>
-            <p style="color:var(--dim); font-size: 1.2rem;">5+ years of expertise. Specializing in Askona, Ormatek, Raiton, and IKEA.</p>
-            <div class="btn-container">
-                <a href="tel:+79017803794" class="btn-primary">Call Now</a>
-                <a href="#exp-en" class="btn-secondary">My Experience</a>
+    <div id="en" class="hidden">
+        <section class="hero" id="about-en">
+            <h1>Furniture Assembly <br><span class="accent">Fine-Tuned</span></h1>
+            <p style="color:var(--dim); font-size: 1.3rem; margin: 20px 0;">5+ years of expertise in Askona, Ormatek, Raiton, and IKEA.</p>
+            <div class="btn-group">
+                <a href="tel:+79017803794" class="b-pri">Call Me</a>
+                <a href="#experience" class="b-sec">Experience</a>
             </div>
         </section>
-
-        <section id="exp-en">
-            <h2>Experience</h2>
-            <div class="card">
-                <h3 style="margin-top:0; color:var(--accent)">Aviapark Mall (2022)</h3>
-                <p>Assembled the entire Askona flagship store solo for the grand opening.</p>
-                <p style="margin-bottom:0;">VIP Clients: <b>Philipp Kirkorov, Lada Dance.</b></p>
-            </div>
-        </section>
+        <section><h2>Services</h2><div class="grid"><div class="card"><h3>Beds</h3><p>All brands and mechanisms.</p></div><div class="card"><h3>Wardrobes</h3><p>Sliding and hinged systems.</p></div></div></section>
     </div>
 </div>
 
-<footer>
-    © 2026 Даниэль. Москва и Московская область.
-</footer>
+<footer style="text-align:center; padding: 50px; color:var(--dim);">© 2026 Даниэль. Москва и МО.</footer>
 
 <script>
     function toggleTheme() {
-        const body = document.body;
-        const themeBtn = document.getElementById('themeBtn');
-        const isDark = body.getAttribute('data-theme') === 'dark';
-        
-        body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-        themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        const b = document.body;
+        const i = document.getElementById('tIcon');
+        const isD = b.getAttribute('data-theme') === 'dark';
+        b.setAttribute('data-theme', isD ? 'light' : 'dark');
+        i.className = isD ? 'fas fa-sun' : 'fas fa-moon';
     }
-
-    function toggleLanguage() {
-        const ru = document.getElementById('content-ru');
-        const en = document.getElementById('content-en');
-        const btn = document.getElementById('langBtn');
-        
-        if (ru.classList.contains('hidden')) {
-            ru.classList.remove('hidden');
-            en.classList.add('hidden');
-            btn.innerText = 'EN';
-        } else {
-            ru.classList.add('hidden');
-            en.classList.remove('hidden');
-            btn.innerText = 'RU';
-            document.title = "Daniel | Furniture Assembly";
-        }
+    function toggleLang() {
+        const r = document.getElementById('ru'); const e = document.getElementById('en');
+        const mr = document.getElementById('menu-ru'); const me = document.getElementById('menu-en');
+        const b = document.getElementById('lBtn');
+        const isR = e.classList.contains('hidden');
+        r.classList.toggle('hidden'); e.classList.toggle('hidden');
+        mr.classList.toggle('hidden'); me.classList.toggle('hidden');
+        b.innerText = isR ? 'RU' : 'EN';
     }
 </script>
-
 </body>
 </html>
