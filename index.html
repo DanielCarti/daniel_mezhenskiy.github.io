@@ -50,6 +50,7 @@
         section { padding: 60px 0 20px; }
         
         h2 { font-size: 2rem; color: var(--yellow); border-left: 4px solid var(--yellow); padding-left: 15px; margin-bottom: 30px; }
+        h3 { font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px; color: var(--text); }
         .accent { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -91,6 +92,38 @@
         }
         .cta-btn:hover { transform: scale(1.05); }
 
+        /* Галерея */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Адаптивная сетка */
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 150px; /* Фиксированная высота для единообразия */
+            object-fit: cover; /* Обрезка, чтобы заполнить блок */
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+        .photo-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: #333; /* Серый цвет для заглушек */
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dim);
+            font-size: 0.9rem;
+            border: 1px solid #444;
+        }
+
         .hidden { display: none; }
         @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
@@ -103,6 +136,7 @@
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
         <a href="#experience">Опыт</a>
+        <a href="#portfolio">Портфолио</a>
         <a href="#guarantee">Гарантия</a>
     </div>
     <div class="controls">
@@ -113,13 +147,22 @@
 
 <div class="container">
     <div id="ru">
-        <section id="about">
+  <section id="about" class="hero">
             <h2>О мастере</h2>
-            <div class="card-exp">
-                <p style="font-size: 1.1rem; line-height: 1.8;">
-                    Профессиональный сборщик корпусной мебели с инженерным подходом и опытом работы более 5 лет. Специализируюсь на премиальных брендах и сложных конструкциях. За время карьеры собрал тысячи единиц мебели, работая в режиме высокой интенсивности (до 10 кроватей в день без потери качества).
-                </p>
-                <p style="font-size: 1.1rem;">Мой подход — это сочетание скорости, аккуратности и безупречного сервиса в общении с каждым клиентом.</p>
+            <div class="card-exp" style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+                <div style="flex: 0 0 200px; margin: 0 auto;">
+                    <img src="images/avatar.jpg" alt="Даниэль" style="width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(109, 40, 217, 0.3);">
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 0;">
+                        Профессиональный сборщик корпусной мебели с инженерным подходом и опытом работы более 5 лет. Специализируюсь на премиальных брендах и сложных конструкциях. За время карьеры собрал тысячи единиц мебели, работая в режиме высокой интенсивности (до 10 кроватей в день без потери качества).
+                    </p>
+                    <p style="font-size: 1.1rem;">Мой подход — это сочетание скорости, аккуратности и безупречного сервиса в общении с каждым клиентом.</p>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="tel:+79017803794" class="cta-btn" style="background:var(--grad); color:white; font-size:1.1rem; padding:15px 30px; border-radius:12px;">Позвонить Даниэлю</a>
             </div>
         </section>
 
@@ -181,17 +224,31 @@
             </div>
         </section>
 
-            <div class="card-exp">
-                <h3 style="color:var(--yellow); margin-top:0;">3. Работа с VIP-клиентами</h3>
-                <p>Многолетний опыт работы в премиум-сегменте и деликатный подход. Среди клиентов, доверивших мне сборку своего интерьера: <span class="accent" style="font-weight:bold">Филипп Киркоров</span> и <span class="accent" style="font-weight:bold">Эвелина Блёданс</span>.</p>
+        <section id="portfolio">
+            <h2>Портфолио</h2>
+            
+            <h3>Салон Askona (ТЦ «Авиапарк»)</h3>
+            <div class="photo-gallery">
+                <div class="photo-placeholder">Фото 1</div>
+                <div class="photo-placeholder">Фото 2</div>
+                <div class="photo-placeholder">Фото 3</div>
+                <div class="photo-placeholder">Фото 4</div>
             </div>
 
-            <div class="card-exp">
-                <h3 style="color:var(--yellow); margin-top:0;">4. Работа с брендами-лидерами</h3>
-                <p>Экспертное знание технологических карт и нюансов фурнитуры компаний <b>Askona, Орматек, Райтон и IKEA</b>. Опыт стабильной работы: минимум 20 дней в месяц на протяжении 5 лет.</p>
+            <h3>Салоны в ТЦ «Щелковский»</h3>
+            <div class="photo-gallery">
+                <div class="photo-placeholder">Фото 1 (Askona)</div>
+                <div class="photo-placeholder">Фото 2 (Askona)</div>
+                <div class="photo-placeholder">Фото 3 (Орматек)</div>
+                <div class="photo-placeholder">Фото 4 (Орматек)</div>
             </div>
-        </section>
-        
+
+            <h3>Прочие работы</h3>
+            <div class="photo-gallery">
+                <div class="photo-placeholder">Фото 1 (Кровать)</div>
+                <div class="photo-placeholder">Фото 2 (Шкаф)</div>
+                <div class="photo-placeholder">Фото 3 (Подсветка)</div>
+                <div class="photo-placeholder">Фото 4 (Другое)</div>
             </div>
         </section>
 
