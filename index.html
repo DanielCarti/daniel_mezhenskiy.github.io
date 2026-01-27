@@ -116,25 +116,28 @@
 
         /* The Modal (background) */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; /* Hidden by default, changed to flex by JS on click */
             position: fixed; /* Stay in place */
             z-index: 1001; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            
+            /* Flexbox properties to center the content */
+            align-items: center;
+            justify-content: center;
         }
 
         /* Modal Content (image) */
         .modal-content {
             margin: auto;
             display: block;
-            width: 80%;
-            max-width: 700px;
+            /* Scale image to fit viewport */
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
         }
 
         /* Add Animation */
@@ -174,12 +177,22 @@
 
 <nav>
     <div class="logo"><div class="logo-dot"></div> Даниэль</div>
-    <div class="nav-links">
+    <!-- Russian Nav Links -->
+    <div class="nav-links" id="nav-ru">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
         <a href="#experience">Опыт</a>
         <a href="#portfolio">Портфолио</a>
         <a href="#guarantee">Гарантия</a>
+    </div>
+
+    <!-- English Nav Links -->
+    <div class="nav-links hidden" id="nav-en">
+        <a href="#about-en">About</a>
+        <a href="#services-en">Services</a>
+        <a href="#experience-en">Experience</a>
+        <a href="#portfolio-en">Portfolio</a>
+        <a href="#guarantee-en">Warranty</a>
     </div>
     <div class="controls">
         <button class="c-btn" onclick="toggleLang()" id="lBtn">EN</button>
@@ -202,8 +215,9 @@
                     <p style="font-size: 1.1rem;">Мой подход — это сочетание скорости, аккуратности и безупречного сервиса в общении с каждым клиентом.</p>
                 </div>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" style="display:flex; gap: 15px; margin-top: 20px; justify-content: center;">
                 <a href="tel:+79017803794" class="cta-btn" style="background:var(--grad); color:white; font-size:1.1rem; padding:15px 30px; border-radius:12px;">Позвонить Даниэлю</a>
+                <a href="https://wa.me/+79017803794" class="cta-btn" style="background:#25D366; color:white; font-size:1.1rem; padding:15px 30px; border-radius:12px;">Написать в WhatsApp</a>
             </div>
         </section>
 
@@ -314,7 +328,10 @@
         <div class="cta-section">
             <h2>Сделать заказ</h2>
             <p>Работаю по Москве и МО. Связь с 12:00 до 23:00</p>
-            <a href="tel:+79017803794" class="cta-btn">Позвонить мастеру</a>
+            <div style="display:flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                <a href="tel:+79017803794" class="cta-btn" style="margin-top: 0;">Позвонить мастеру</a>
+                <a href="https://wa.me/+79017803794" class="cta-btn" style="background:#25D366; margin-top: 0;">Написать в WhatsApp</a>
+            </div>
         </div>
     </div>
 
@@ -332,8 +349,9 @@
                     <p style="font-size: 1.1rem;">My approach is a combination of speed, accuracy, and impeccable service in communicating with every client.</p>
                 </div>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" style="display:flex; gap: 15px; margin-top: 20px; justify-content: center;">
                 <a href="tel:+79017803794" class="cta-btn" style="background:var(--grad); color:white; font-size:1.1rem; padding:15px 30px; border-radius:12px;">Call Daniel</a>
+                <a href="https://wa.me/+79017803794" class="cta-btn" style="background:#25D366; color:white; font-size:1.1rem; padding:15px 30px; border-radius:12px;">Write on WhatsApp</a>
             </div>
         </section>
 
@@ -444,7 +462,10 @@
         <div class="cta-section">
             <h2>Order Now</h2>
             <p>Moscow and Moscow Region. Available 12:00 - 23:00</p>
-            <a href="tel:+79017803794" class="cta-btn">Call Daniel</a>
+            <div style="display:flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                <a href="tel:+79017803794" class="cta-btn" style="margin-top: 0;">Call Daniel</a>
+                <a href="https://wa.me/+79017803794" class="cta-btn" style="background:#25D366; margin-top: 0;">Write on WhatsApp</a>
+            </div>
         </div>
     </div>
 </div>
@@ -468,13 +489,29 @@
         i.className = isD ? 'fas fa-sun' : 'fas fa-moon';
     }
     function toggleLang() {
-        const r = document.getElementById('ru'); 
-        const e = document.getElementById('en');
-        const b = document.getElementById('lBtn');
-        const isR = e.classList.contains('hidden');
-        r.classList.toggle('hidden'); 
-        e.classList.toggle('hidden');
-        b.innerText = isR ? 'RU' : 'EN';
+        // Get main content blocks
+        const ruBlock = document.getElementById('ru'); 
+        const enBlock = document.getElementById('en');
+        // Get nav blocks
+        const navRu = document.getElementById('nav-ru');
+        const navEn = document.getElementById('nav-en');
+        // Get button
+        const langBtn = document.getElementById('lBtn');
+
+        // Check if English is currently hidden before the toggle
+        const isEnHidden = enBlock.classList.contains('hidden');
+        
+        // Toggle visibility of all Russian elements
+        ruBlock.classList.toggle('hidden'); 
+        navRu.classList.toggle('hidden');
+        
+        // Toggle visibility of all English elements
+        enBlock.classList.toggle('hidden');
+        navEn.classList.toggle('hidden');
+
+        // Update button text based on which language is now visible.
+        // If English was hidden, it is now visible, so the button should offer to switch to 'RU'.
+        langBtn.innerText = isEnHidden ? 'RU' : 'EN';
     }
 </script>
 <script>
@@ -488,7 +525,7 @@
     var images = document.querySelectorAll('.photo-gallery img');
     images.forEach(function(img) {
         img.onclick = function(){
-            modal.style.display = "block";
+            modal.style.display = "flex";
             modalImg.src = this.src;
         }
     });
@@ -508,5 +545,3 @@
         }
     }
 </script>
-</body>
-</html>
